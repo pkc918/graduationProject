@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {FC} from 'react';
 
-function Home() {
+const Home:FC = () => {
   return (
-    <div>home</div>
+    <div className="App">
+      home
+    </div>
   );
 }
 

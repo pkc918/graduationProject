@@ -1,16 +1,17 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@import '~antd/dist/antd.css';
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.App{
+  height: 100%;
+}
+
+input{
+  outline: none;
 }
 
 .App-header {
@@ -26,6 +27,15 @@
 
 .App-link {
   color: #61dafb;
+}
+
+#root{
+  height: 100%;
+}
+
+h1,h2,h3,h4,h5{
+  margin: 0;
+  padding: 0;
 }
 
 @keyframes App-logo-spin {
