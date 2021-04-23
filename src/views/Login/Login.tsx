@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {ChangeEventHandler, FC, useState} from 'react';
 import styled from 'styled-components';
 import {Button, Input} from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
@@ -10,7 +10,7 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   background: url("https://static.xiedaimala.com/xdml/image/6e556a51-b8ff-466f-bda6-7d1847e39f2e/2019-12-4-14-4-6.jpg") center center / 100% 100% no-repeat;
-
+  
   > .form {
     width: 400px;
     padding-bottom: 20px;
@@ -21,6 +21,11 @@ const Div = styled.div`
     align-items: center;
     grid-auto-columns: 100%;
     grid-auto-rows: 80px 80px 80px 80px 80px;
+
+    > h2 {
+      font-size: 24px;
+      font-weight: 500;
+    }
 
     > .userName {
       justify-self: center;
@@ -84,6 +89,39 @@ const Div = styled.div`
 `;
 
 const Login: FC = () => {
+  const [user, setUser] = useState({username: 'admin', password: '123456', verification:''});
+  const changeUsername: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setUser({
+      username: event.target.value,
+      password: user.password,
+      verification: user.verification
+    });
+    console.log(event.target.value);
+  };
+  const changePassword: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setUser({
+      username: user.username,
+      password: event.target.value,
+      verification: user.verification
+    });
+    console.log(event.target.value);
+  };
+  const changeVerification: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setUser({
+      username: user.username,
+      password: user.password,
+      verification: event.target.value
+    });
+    console.log(event.target.value);
+  };
+  const handleGetCode = () => {
+
+  };
+  const handleSubmit = () => {
+    console.log(user);
+  };
+
+
   return (
     <Div className='login'>
       <div className="form">
@@ -92,18 +130,22 @@ const Login: FC = () => {
           bordered={false}
           className="userName"
           placeholder="请输入账号"
+          value={user.username}
+          onChange={changeUsername}
         />
         <Input.Password
           bordered={false}
           className="password"
           placeholder="请输入密码"
+          value={user.password}
+          onChange={changePassword}
           iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
         />
         <div className="verificationCode">
-          <input type="text" placeholder="验证码"/>
-          <button>验证码</button>
+          <input value={user.verification} onChange={changeVerification} type="text" placeholder="验证码"/>
+          <button onClick={handleGetCode}>验证码</button>
         </div>
-        <Button className="loginBtn">登录</Button>
+        <Button className="loginBtn" onClick={handleSubmit}>登录</Button>
       </div>
     </Div>
   );
