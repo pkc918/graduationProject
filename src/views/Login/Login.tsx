@@ -1,139 +1,63 @@
-import React, {ChangeEventHandler, FC, useState} from 'react';
-// import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import {Button, Input} from 'antd';
+import React, {ChangeEventHandler, FC, useEffect, useState} from 'react';
+import { useHistory } from 'react-router-dom';
+import {Div} from './UI';
+import {Button, Input,message} from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
-// import request from '../../request/request';
-
-const Div = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  background: url("https://static.xiedaimala.com/xdml/image/6e556a51-b8ff-466f-bda6-7d1847e39f2e/2019-12-4-14-4-6.jpg") center center / 100% 100% no-repeat;
-  
-  > .form {
-    width: 400px;
-    padding-bottom: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    display: grid;
-    text-align: center;
-    align-items: center;
-    grid-auto-columns: 100%;
-    grid-auto-rows: 80px 80px 80px 80px 80px;
-
-    > h2 {
-      font-size: 24px;
-      font-weight: 500;
-    }
-
-    > .userName {
-      justify-self: center;
-      width: 300px;
-      height: 40px;
-      padding: 10px;
-      border: 1px solid #333;
-      border-radius: 6px;
-      outline: none;
-    }
-
-    > .password {
-      justify-self: center;
-      width: 300px;
-      height: 40px;
-      padding: 10px;
-      border: 1px solid #333;
-      border-radius: 6px;
-      outline: none;
-    }
-
-    > .verificationCode {
-      width: 300px;
-      justify-self: center;
-      display: grid;
-      grid: 'input btn';
-      grid-auto-rows: 150px 150px;
-
-      > input {
-        grid-area: input;
-        width: 150px;
-        height: 40px;
-        padding: 10px;
-        border: 1px solid #333;
-        border-radius: 6px;
-        outline: none;
-      }
-
-      > button {
-        grid-area: btn;
-        width: 130px;
-        height: 40px;
-        color: #fff;
-        border: none;
-        background-color: #fff;
-        border-radius: 5px;
-        outline: none;
-        cursor: pointer;
-        
-        img{
-          width: 100%;
-          height: 100%;
-          border: none;
-        }
-      }
-    }
-
-    > .loginBtn {
-      justify-self: center;
-      width: 300px;
-      height: 40px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-    }
-  }
-`;
+import request from '../../request/request';
 
 const Login: FC = () => {
-  const [user, setUser] = useState({username: 'admin', password: '123456', verification:''});
-  const [imgURL,setImgUrl] = useState('http://42.51.222.98:6789/captcha');
-  // const history = useHistory();
+  const [user, setUser] = useState({username: 'admin', password: '123456', code:''});
+  const [imgURL,setImgUrl] = useState({base64: '',captchaKey: ''});
+  const history = useHistory();
+
   const changeUsername: ChangeEventHandler<HTMLInputElement> = (event) => {
     setUser({
       username: event.target.value,
       password: user.password,
-      verification: user.verification
+      code: user.code
     });
-    console.log(event.target.value);
   };
   const changePassword: ChangeEventHandler<HTMLInputElement> = (event) => {
     setUser({
       username: user.username,
       password: event.target.value,
-      verification: user.verification
+      code: user.code
     });
-    console.log(event.target.value);
   };
   const changeVerification: ChangeEventHandler<HTMLInputElement> = (event) => {
     setUser({
       username: user.username,
       password: user.password,
-      verification: event.target.value
+      code: event.target.value
     });
-    console.log(event.target.value);
   };
   const handleGetCode = () => {
-    let time = new Date();
-    setImgUrl(`http://42.51.222.98:6789/captcha?time=${time}`)
+    request('/captcha','GET')
+      .then(res => {
+        setImgUrl({
+          base64: res.data.data.base64Img,
+          captchaKey: res.data.data.captchaKey
+        });
+      })
   };
   const handleSubmit = () => {
-
+    request('/admin/login','POST',{...user,'captchaKey':imgURL.captchaKey})
+      .then(res => {
+        message.success(res.data.msg).then(r => r);
+        if (localStorage.getItem('X-Token')){
+          history.push('/home');
+        }
+      })
+      .catch(err => {
+        message.error(err.data.msg).then(r => r);
+      })
+    console.log(imgURL);
     console.log(user);
   };
-
+  /* 获取第一次进入的图形验证码 */
+  useEffect(() => {
+    handleGetCode();
+  },[])
 
   return (
     <Div className='login'>
@@ -155,9 +79,9 @@ const Login: FC = () => {
           iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
         />
         <div className="verificationCode">
-          <input value={user.verification} onChange={changeVerification} type="text" placeholder="验证码"/>
+          <input value={user.code} onChange={changeVerification} type="text" placeholder="验证码"/>
           <button onClick={handleGetCode}>
-            <img src={imgURL} alt="" title="看不清，换一张"/>
+            <img src={imgURL.base64} alt="" title="看不清，换一张"/>
           </button>
         </div>
         <Button className="loginBtn" onClick={handleSubmit}>登录</Button>
