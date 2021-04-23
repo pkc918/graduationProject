@@ -57,7 +57,7 @@ const Login: FC = () => {
   /* 获取第一次进入的图形验证码 */
   useEffect(() => {
     handleGetCode();
-  },[])
+  },[]);
 
   return (
     <Div className='login'>
