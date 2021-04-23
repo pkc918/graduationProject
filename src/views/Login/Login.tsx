@@ -1,7 +1,9 @@
 import React, {ChangeEventHandler, FC, useState} from 'react';
+// import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import {Button, Input} from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
+// import request from '../../request/request';
 
 const Div = styled.div`
   width: 100%;
@@ -56,7 +58,7 @@ const Div = styled.div`
 
       > input {
         grid-area: input;
-        width: 180px;
+        width: 150px;
         height: 40px;
         padding: 10px;
         border: 1px solid #333;
@@ -66,13 +68,20 @@ const Div = styled.div`
 
       > button {
         grid-area: btn;
+        width: 130px;
         height: 40px;
-        background-color: #333;
         color: #fff;
         border: none;
+        background-color: #fff;
         border-radius: 5px;
         outline: none;
         cursor: pointer;
+        
+        img{
+          width: 100%;
+          height: 100%;
+          border: none;
+        }
       }
     }
 
@@ -90,6 +99,8 @@ const Div = styled.div`
 
 const Login: FC = () => {
   const [user, setUser] = useState({username: 'admin', password: '123456', verification:''});
+  const [imgURL,setImgUrl] = useState('http://42.51.222.98:6789/captcha');
+  // const history = useHistory();
   const changeUsername: ChangeEventHandler<HTMLInputElement> = (event) => {
     setUser({
       username: event.target.value,
@@ -115,9 +126,11 @@ const Login: FC = () => {
     console.log(event.target.value);
   };
   const handleGetCode = () => {
-
+    let time = new Date();
+    setImgUrl(`http://42.51.222.98:6789/captcha?time=${time}`)
   };
   const handleSubmit = () => {
+
     console.log(user);
   };
 
@@ -143,7 +156,9 @@ const Login: FC = () => {
         />
         <div className="verificationCode">
           <input value={user.verification} onChange={changeVerification} type="text" placeholder="验证码"/>
-          <button onClick={handleGetCode}>验证码</button>
+          <button onClick={handleGetCode}>
+            <img src={imgURL} alt="" title="看不清，换一张"/>
+          </button>
         </div>
         <Button className="loginBtn" onClick={handleSubmit}>登录</Button>
       </div>
