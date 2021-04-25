@@ -9,7 +9,6 @@ const Home: FC = () => {
     width: 100%;
     height: 100vh;
     display: flex;
-    //background: url("https://xiaopan-struggle.github.io/Echats-Demo/images/bg.jpg") no-repeat;
 
     > div {
       width: 100%;
@@ -241,7 +240,7 @@ const Home: FC = () => {
           />
           <EChartsReact
             option={pieOption}
-            style={{width: '500px', height: '600px'}}
+            style={{width: '500px', height: '500px'}}
           />
         </div>
       </div>
