@@ -4,8 +4,7 @@ import request from '../../request/request';
 import styled from 'styled-components';
 import {NavBar} from '../../components/Nav';
 
-const Home: FC = () => {
-  const Main = styled.main`
+const Main = styled.main`
     width: 100%;
     height: 100vh;
     display: flex;
@@ -31,6 +30,8 @@ const Home: FC = () => {
     }
   `;
 
+
+const Home: FC = () => {
   const [positionName, setPositionName] = useState(['']);
   const [positionNumber, setPositionNumber] = useState([5000]);
   const [education, setEducation] = useState([{}]);
