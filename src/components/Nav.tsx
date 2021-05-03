@@ -13,7 +13,6 @@ const Nav = styled.ul`
   > li{
     width: 100%;
     height: 60px;
-    background: #f60;
     
     > a{
       display: inline-block;
@@ -39,6 +38,9 @@ const NavBar = (props: propsType) => {
     <Nav>
       <li>
         <Link className={props.id === 1 ? 'seleted' : ''} to="/home">数据统计</Link>
+      </li>
+      <li>
+        <Link className={props.id === 2 ? 'seleted' : ''} to="/querypage">职位查询</Link>
       </li>
     </Nav>
   );

@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'http://gobt.top/';
+axios.defaults.baseURL = 'https://gobt.top/';
 export default function request(url, type = 'GET', data = {}) {
   return new Promise((resolve, reject) => {
     let option = {
