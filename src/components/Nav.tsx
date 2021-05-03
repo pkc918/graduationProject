@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Nav = styled.ul`
   background: #aaa;
   width: 180px;
+  min-width: 180px;
   height: 100%;
   padding: 40px 0;
   list-style: none;
