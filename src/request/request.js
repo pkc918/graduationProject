@@ -18,7 +18,7 @@ export default function request(url, type = 'GET', data = {}) {
       .then(res => {
         console.log(res);
         if (res.data.data && res.data.data.token){
-          localStorage.setItem('X-Token',res.data.data.token);
+          localStorage.setItem('token',res.data.data.token);
         }
         if (res.status === 200 && res.data.code === 200){
           resolve(res)
@@ -28,7 +28,7 @@ export default function request(url, type = 'GET', data = {}) {
       .catch(err => {
         console.log(err.toString().indexOf('401'));
         if (err.toString().indexOf('401') !== -1){
-          localStorage.removeItem('X-Token');
+          localStorage.removeItem('token');
           window.location.href = '/login'
         }
         reject(err);

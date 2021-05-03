@@ -9,7 +9,7 @@ export class FrontendAuth extends React.Component<any, propsModel>{
   render() {
     const {location,config} = this.props;
     const {pathname} = location;
-    const isLogin = localStorage.getItem('X-Token');
+    const isLogin = localStorage.getItem('token');
     const targetRouterConfig = config.find((v:any) => v.path === pathname);
 
     if (targetRouterConfig && !targetRouterConfig.auth && !isLogin){

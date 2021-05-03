@@ -44,7 +44,8 @@ const Login: FC = () => {
     request('/admin/login','POST',{...user,'captchaKey':imgURL.captchaKey})
       .then(res => {
         message.success(res.data.msg).then(r => r);
-        if (localStorage.getItem('X-Token')){
+        if (localStorage.getItem('token')){
+          console.log(111);
           history.push('/home');
         }
       })
