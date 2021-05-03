@@ -1,32 +1,22 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
+  Switch
 } from 'react-router-dom';
 import './App.css';
+import { FrontendAuth } from './components/FrontendAuth';
+import { routerConfig } from './router/RouterTable';
 
-import Home from './views/Home/home';
-import Login from './views/Login/Login';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/login">
-            <Login/>
-          </Route>
-          <Route exact path="/home">
-            <Home/>
-          </Route>
-          <Route path="/">
-            <Login />
-          </Route>
+          <FrontendAuth config={routerConfig} />
         </Switch>
       </Router>
     </div>
-
   );
 }
 

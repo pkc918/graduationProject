@@ -9,6 +9,7 @@ const Home: FC = () => {
     width: 100%;
     height: 100vh;
     display: flex;
+    overflow: hidden;
 
     > div {
       width: 100%;
