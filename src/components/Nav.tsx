@@ -42,6 +42,9 @@ const NavBar = (props: propsType) => {
       <li>
         <Link className={props.id === 2 ? 'seleted' : ''} to="/querypage">职位查询</Link>
       </li>
+      <li>
+        <Link className={props.id === 3 ? 'seleted' : ''} to="/feedback">用户反馈</Link>
+      </li>
     </Nav>
   );
 };
