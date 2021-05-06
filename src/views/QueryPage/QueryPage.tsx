@@ -2,43 +2,45 @@ import React, {ChangeEventHandler, FC, useEffect, useState} from 'react';
 import {NavBar} from '../../components/Nav';
 import styled from 'styled-components';
 import {Button, DatePicker, Input, Select, Table, TablePaginationConfig} from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import {SearchOutlined} from '@ant-design/icons';
 import request from '../../request/request';
 import moment from 'moment';
 import {ColumnsType} from 'antd/es/table';
 import UpdateXLS from '../../components/UpdateXLS';
 
 const Div = styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
 
-    > div {
-      width: 100%;
-      padding: 30px;
-      display: grid;
-      grid-template-columns: 20% 80%;
-      
-      >.search{
-        padding-right: 30px;
-        border-right: 1px dashed #333;
-        
-        > div{
-          width: 100%;
-          margin-bottom: 20px;
-        }
-      }
-      
-      >.dataInfo{
-        margin-left: 30px;
+  > div {
+    width: 100%;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+
+    > .search {
+      padding-right: 30px;
+      border-right: 1px dashed #333;
+
+      > div {
+        width: 100%;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
       }
     }
-  
-  .ant-pagination-options{
+
+    > .dataInfo {
+      margin-left: 30px;
+    }
+  }
+
+  .ant-pagination-options {
     display: none;
   }
-  `
+`;
 
 interface TopBar {
   key: number;
@@ -46,17 +48,17 @@ interface TopBar {
 }
 
 const QueryPage: FC = () => {
-  const { Option } = Select;
-  const { RangePicker } = DatePicker;
+  const {Option} = Select;
+  const {RangePicker} = DatePicker;
 
   /*可选数据*/
-  const [education] = useState(["博士","硕士","本科","大专","中专","中技","高中","学历不限"]);
-  const [position] = useState(["java","python爬虫","全栈工程师","前端","大数据"]);
-  const [citys,setCitys] = useState([]);
+  const [education] = useState(['博士', '硕士', '本科', '大专', '中专', '中技', '高中', '学历不限']);
+  const [position] = useState(['java', 'python爬虫', '全栈工程师', '前端', '大数据']);
+  const [citys, setCitys] = useState([]);
 
   /*table 数据*/
-  const [pagination,setPagination] = useState({current: 1,total: 0})
-  const [dataSource,setDataSource] = useState([]);
+  const [pagination, setPagination] = useState({current: 1, total: 0});
+  const [dataSource, setDataSource] = useState([]);
   const columns: ColumnsType<TopBar> = [
     {
       title: '城市',
@@ -100,48 +102,48 @@ const QueryPage: FC = () => {
     }
   ];
   /*设置更新*/
-  const [flag,setFlag] = useState({});
+  const [flag, setFlag] = useState({});
 
   const handleChangePage = (page: TablePaginationConfig) => {
-    let {current,total} = page
+    let {current, total} = page;
     // @ts-ignore
-    setPagination({current,total});
+    setPagination({current, total});
     setFlag({});
-  }
+  };
 
   /*筛选数据*/
-  const [educationId,setEducation] = useState('');
+  const [educationId, setEducation] = useState('');
   const handleEducationId: (event: string) => void = (event => {
     console.log(event);
     setEducation(event);
-  })
-  const [searchName,setSearchName] = useState('');
+  });
+  const [searchName, setSearchName] = useState('');
   const handleSearchName: (event: string) => void = (event => {
     console.log(event);
     setSearchName(event);
-  })
-  const [jobName,setJobName] = useState('');
+  });
+  const [jobName, setJobName] = useState('');
   const handleJobName: ChangeEventHandler<HTMLInputElement> = (event) => {
     console.log(event.target.value);
     setJobName(event.target.value);
-  }
-  const [areaName,setAreaName] = useState('');
-  const handleChangeId:(event: string) => void = (event) => {
+  };
+  const [areaName, setAreaName] = useState('');
+  const handleChangeId: (event: string) => void = (event) => {
     console.log(event);
     setAreaName(event);
-  }
-  const [startTime,setStartTime] = useState('');
-  const [endTime,setEndTime] = useState('');
+  };
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const timeValue = (value: any) => {
     console.log(value);
-    if (value){
+    if (value) {
       setStartTime(moment(value[0]._d).format('YYYY-MM-DD HH:mm:ss'));
       setEndTime(moment(value[1]._d).format('YYYY-MM-DD HH:mm:ss'));
-      return
+      return;
     }
-    setStartTime("")
-    setEndTime("")
-  }
+    setStartTime('');
+    setEndTime('');
+  };
 
   /*submit*/
   const handleSubmit = () => {
@@ -152,30 +154,30 @@ const QueryPage: FC = () => {
       areaName,
       startTime,
       endTime
-    }
-    request(`/spider-position/selectPage?pageNum=${pagination.current}&pageSize=10`,'POST',data)
+    };
+    request(`/spider-position/selectPage?pageNum=${pagination.current}&pageSize=10`, 'POST', data)
       .then(res => {
-        let {records,total,current} = res.data.data;
+        let {records, total, current} = res.data.data;
         setDataSource(records);
         setPagination({
           current,
           total
-        })
+        });
         console.log(res.data.data);
-      })
-  }
+      });
+  };
   useEffect(() => {
-    handleSubmit()
+    handleSubmit();
     // console.log(1);
-  },[flag]);
+  }, [flag]);
 
   useEffect(() => {
-    request('/spider-position/area','POST')
+    request('/spider-position/area', 'POST')
       .then(res => {
         setCitys(res.data.data);
         console.log(res.data.data);
-      })
-  },[])
+      });
+  }, []);
 
   return (
     <Div className="page">
@@ -194,8 +196,7 @@ const QueryPage: FC = () => {
           <Select
             placeholder="爬虫检索名称"
             allowClear
-            onChange={handleSearchName
-            }
+            onChange={handleSearchName}
           >
             {position.map(item => (
               <Option key={item} value={item}>{item}</Option>
@@ -205,7 +206,7 @@ const QueryPage: FC = () => {
             <Input
               placeholder="职位"
               allowClear
-              value={jobName} onChange={handleJobName} />
+              value={jobName} onChange={handleJobName}/>
           </div>
           <RangePicker
             format="YYYY-MM-DD"
@@ -223,14 +224,17 @@ const QueryPage: FC = () => {
               >{item}</Option>
             ))}
           </Select>
-          <Button
-            type="primary"
-            icon={<SearchOutlined/>}
-            onClick={handleSubmit}
-          >
-            查询
-          </Button>
-          <UpdateXLS/>
+          <div>
+            <Button
+              className="btn"
+              type="primary"
+              icon={<SearchOutlined/>}
+              onClick={handleSubmit}
+            >
+              查询
+            </Button>
+            <UpdateXLS/>
+          </div>
         </div>
         <div className="dataInfo">
           <Table
@@ -243,7 +247,7 @@ const QueryPage: FC = () => {
         </div>
       </div>
     </Div>
-  )
-}
+  );
+};
 
-export default QueryPage
+export default QueryPage;
