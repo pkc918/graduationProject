@@ -6,6 +6,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import request from '../../request/request';
 import moment from 'moment';
 import {ColumnsType} from 'antd/es/table';
+import UpdateXLS from '../../components/UpdateXLS';
 
 const Div = styled.div`
     width: 100%;
@@ -229,6 +230,7 @@ const QueryPage: FC = () => {
           >
             查询
           </Button>
+          <UpdateXLS/>
         </div>
         <div className="dataInfo">
           <Table
