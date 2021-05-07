@@ -6,7 +6,8 @@ import request from '../../request/request';
 import moment from 'moment';
 import {ColumnsType} from 'antd/es/table';
 import UpdateXLS from '../../components/UpdateXLS';
-import { Div } from './UI'
+import {Div} from './UI'
+
 
 interface TopBar {
   key: number;
@@ -21,6 +22,9 @@ const QueryPage: FC = () => {
   const [education] = useState(['博士', '硕士', '本科', '大专', '中专', '中技', '高中', '学历不限']);
   const [position, setPosition] = useState([]);
   const [citys, setCitys] = useState([]);
+
+  // 控制更新
+  const [flag,setFlag] = useState({});
 
   /*table 数据*/
   const [pagination, setPagination] = useState({current: 1, total: 0});
@@ -72,6 +76,7 @@ const QueryPage: FC = () => {
     let {current, total} = page;
     // @ts-ignore
     setPagination({current, total});
+    setFlag({});
   };
 
   /*筛选数据*/
@@ -110,6 +115,13 @@ const QueryPage: FC = () => {
 
   /*submit*/
   const handleSubmit = () => {
+    // @ts-ignore
+    setPagination((pagination) => {
+      return {
+        current: pagination.current = 1
+      }
+    })
+    console.log(pagination)
     let data = {
       education: educationId,
       searchName,
@@ -131,16 +143,10 @@ const QueryPage: FC = () => {
   };
 
   useEffect(() => {
-    request(`/spider-position/selectPage?pageNum=1&pageSize=10`, 'POST')
-      .then(res => {
-        let {records, total, current} = res.data.data;
-        setDataSource(records);
-        setPagination({
-          current,
-          total
-        });
-        console.log(res.data.data);
-      });
+    handleSubmit()
+  },[flag])
+
+  useEffect(() => {
     request('/spider-position/area', 'POST')
       .then(res => {
         setCitys(res.data.data);
