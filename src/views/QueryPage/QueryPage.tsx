@@ -53,7 +53,7 @@ const QueryPage: FC = () => {
 
   /*可选数据*/
   const [education] = useState(['博士', '硕士', '本科', '大专', '中专', '中技', '高中', '学历不限']);
-  const [position] = useState(['java', 'python爬虫', '全栈工程师', '前端', '大数据']);
+  const [position, setPosition] = useState([]);
   const [citys, setCitys] = useState([]);
 
   /*table 数据*/
@@ -101,14 +101,11 @@ const QueryPage: FC = () => {
       key: 'searchName'
     }
   ];
-  /*设置更新*/
-  const [flag, setFlag] = useState({});
 
   const handleChangePage = (page: TablePaginationConfig) => {
     let {current, total} = page;
     // @ts-ignore
     setPagination({current, total});
-    setFlag({});
   };
 
   /*筛选数据*/
@@ -166,15 +163,27 @@ const QueryPage: FC = () => {
         console.log(res.data.data);
       });
   };
-  useEffect(() => {
-    handleSubmit();
-    // console.log(1);
-  }, [flag]);
 
   useEffect(() => {
+    request(`/spider-position/selectPage?pageNum=1&pageSize=10`, 'POST')
+      .then(res => {
+        let {records, total, current} = res.data.data;
+        setDataSource(records);
+        setPagination({
+          current,
+          total
+        });
+        console.log(res.data.data);
+      });
     request('/spider-position/area', 'POST')
       .then(res => {
         setCitys(res.data.data);
+        console.log(res.data.data);
+      });
+    request('/spider-position/getPosition', 'POST')
+      .then(res => {
+        console.log('爬虫检索名称');
+        setPosition(res.data.data);
         console.log(res.data.data);
       });
   }, []);
