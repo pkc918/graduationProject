@@ -55,7 +55,6 @@ const Login: FC = () => {
     console.log(imgURL);
     console.log(user);
   };
-  /* 获取第一次进入的图形验证码 */
   useEffect(() => {
     handleGetCode();
   },[]);

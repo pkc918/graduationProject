@@ -10,7 +10,7 @@ const Main = styled.main`
       padding: 30px;
       display: grid;
       grid-template-areas: "bar main";
-      grid-template-columns: 800px 1fr;
+      grid-template-columns: 50% 50%;
 
       > .bar {
         grid-area: bar;
@@ -18,7 +18,6 @@ const Main = styled.main`
 
       > .main {
         grid-area: main;
-        margin-left: 60px;
         display: grid;
         grid-template-rows: auto auto;
       }
