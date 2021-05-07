@@ -1,46 +1,12 @@
 import React, {ChangeEventHandler, FC, useEffect, useState} from 'react';
 import {NavBar} from '../../components/Nav';
-import styled from 'styled-components';
 import {Button, DatePicker, Input, Select, Table, TablePaginationConfig} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
 import request from '../../request/request';
 import moment from 'moment';
 import {ColumnsType} from 'antd/es/table';
 import UpdateXLS from '../../components/UpdateXLS';
-
-const Div = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  overflow: hidden;
-
-  > div {
-    width: 100%;
-    padding: 30px;
-    display: grid;
-    grid-template-columns: 15% 85%;
-
-    > .search {
-      padding-right: 30px;
-      border-right: 1px dashed #333;
-
-      > div {
-        width: 100%;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: space-between;
-      }
-    }
-
-    > .dataInfo {
-      margin-left: 30px;
-    }
-  }
-
-  .ant-pagination-options {
-    display: none;
-  }
-`;
+import { Div } from './UI'
 
 interface TopBar {
   key: number;
