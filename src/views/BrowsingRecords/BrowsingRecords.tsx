@@ -14,7 +14,6 @@ const Main = styled.main`
     width: 100%;
     padding: 30px;
     display: grid;
-    grid-template-columns: 50% 50%;
   }
 `
 
@@ -55,7 +54,16 @@ const BrowsingRecords: FC = () => {
   const getInfo = () => {
     request('/browse-records/browse-records','POST')
       .then(res => {
+        const data: React.SetStateAction<{}[]> = [];
         console.log(res.data.data);
+        res.data.data.map((item: { positionName: string; positionCount: number; }) => {
+          const {positionName,positionCount} = item
+          data.push({
+            name: positionName,
+            value: positionCount
+          })
+        })
+        setPieData(data)
       })
   }
 
@@ -64,6 +72,7 @@ const BrowsingRecords: FC = () => {
     request('/browse-records/browse-records','POST')
       .then(res => {
         console.log(res.data.data);
+
       })
     // setTimeout(() => {
     //   setPieData([
@@ -90,9 +99,6 @@ const BrowsingRecords: FC = () => {
             option={pieOption}
             style={{width: '800px', height: '800px'}}
           />
-        </div>
-        <div className="release">
-          发布职位
         </div>
       </div>
     </Main>

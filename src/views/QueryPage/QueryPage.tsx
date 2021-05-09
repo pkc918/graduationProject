@@ -69,6 +69,14 @@ const QueryPage: FC = () => {
       title: '爬虫检索名称',
       dataIndex: 'searchName',
       key: 'searchName'
+    },
+    {
+      title: '查看详情',
+      dataIndex: 'companyLink',
+      key: 'companyLink',
+      render: (url) => (
+        <a target={'_blank'} href={url}>详情</a>
+      ),
     }
   ];
 

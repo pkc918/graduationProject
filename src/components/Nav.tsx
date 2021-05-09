@@ -72,7 +72,7 @@ const NavBar = (props: propsType) => {
         <Link className={props.id === 3 ? 'seleted' : ''} to="/feedback">用户反馈</Link>
       </li>
       <li>
-        <Link className={props.id === 4 ? 'seleted' : ''} to="/browsingrecords">发布职位</Link>
+        <Link className={props.id === 4 ? 'seleted' : ''} to="/browsingrecords">浏览记录</Link>
       </li>
     </Nav>
   );
