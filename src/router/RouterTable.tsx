@@ -2,6 +2,7 @@ import Home from '../views/Home/home';
 import Login from '../views/Login/Login';
 import QueryPage from '../views/QueryPage/QueryPage';
 import FeedbackInfo from '../views/Feedback/FeedbackInfo';
+import BrowsingRecords from '../views/BrowsingRecords/BrowsingRecords';
 
 interface routerTable {
   path: string,
@@ -31,5 +32,9 @@ export const routerConfig:routerTable[] = [
   {
     path: '/feedback',
     component: FeedbackInfo
+  },
+  {
+    path: '/browsingrecords',
+    component: BrowsingRecords
   }
 ]

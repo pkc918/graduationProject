@@ -10,7 +10,8 @@ const Main = styled.main`
       padding: 30px;
       display: grid;
       grid-template-areas: "bar main";
-      grid-template-columns: 50% 50%;
+      grid-template-columns: 700px 1fr;
+      overflow: scroll;
 
       > .bar {
         grid-area: bar;

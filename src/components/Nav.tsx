@@ -15,14 +15,21 @@ const Nav = styled.ul`
     width: 100%;
     height: 40px;
     
+    &:first-child{
+      margin-bottom: 30px;
+      border: 3px solid rgb(255, 149, 77);
+      border-radius: 10px;
+      background-color: rgba(255, 149, 77,.5);
+    }
+    
     > a{
-      display: inline-block;
       width: 100%;
       height: 100%;
       font-size: 18px;
       color: #000;
-      text-align: center;
-      line-height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     
     .seleted{
@@ -46,9 +53,15 @@ const Nav = styled.ul`
 type propsType = {
   id: number
 }
+const handleLogout = () => {
+  localStorage.removeItem('token');
+}
 const NavBar = (props: propsType) => {
   return (
     <Nav>
+      <li>
+        <Link onClick={handleLogout} to="/login">退出登录</Link>
+      </li>
       <li>
         <Link className={props.id === 1 ? 'seleted' : ''} to="/home">数据统计</Link>
       </li>
@@ -57,6 +70,9 @@ const NavBar = (props: propsType) => {
       </li>
       <li>
         <Link className={props.id === 3 ? 'seleted' : ''} to="/feedback">用户反馈</Link>
+      </li>
+      <li>
+        <Link className={props.id === 4 ? 'seleted' : ''} to="/browsingrecords">发布职位</Link>
       </li>
     </Nav>
   );

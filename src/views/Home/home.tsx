@@ -206,7 +206,7 @@ const Home: FC = () => {
         <EChartsReact
           className="bar"
           option={barOption}
-          style={{width: '800px', height: '800px'}}
+          style={{width: '700px', height: '800px'}}
         />
         <div className="main">
           <EChartsReact
