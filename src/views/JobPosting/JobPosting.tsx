@@ -3,6 +3,7 @@ import {NavBar} from '../../components/Nav';
 import styled from 'styled-components';
 import {Button, Input, Select} from 'antd';
 import MarkdownEditor from '@uiw/react-markdown-editor';
+import request from '../../request/request';
 
 
 const Main = styled.main`
@@ -51,7 +52,7 @@ const JobPosting: FC = () => {
     console.log(event.target.value);
   }
   /*权重*/
-  const [weights] = useState(["0","1","2","3","4","5","6","7","8","9","10"]);
+  const [weights,setWeights] = useState(["0","1","2","3","4","5","6","7","8","9","10"]);
   const [weight,setWeight] = useState("");
   const handleChangeWeights:(event: string) => void = (event) => {
     console.log(event);
@@ -60,6 +61,26 @@ const JobPosting: FC = () => {
   }
   /*markdown*/
   const [markdown, setMarkdown] = useState("");
+  const result = () => {
+    return "";
+  }
+
+  const handleClick = () => {
+    let data = {
+      title,
+      weight,
+      content: markdown
+    }
+    request('/public-position/public','POST',data)
+      .then(res => {
+        if (res.data.code !== 200) return;
+        setTitle(result());
+        setWeights(["0","1","2","3","4","5","6","7","8","9","10"]);
+        setMarkdown(result());
+      })
+
+    console.log(data);
+  }
 
   return (
     <Main>
@@ -87,6 +108,7 @@ const JobPosting: FC = () => {
         <Button
           className="btn"
           type="primary"
+          onClick={handleClick}
         >
           上传
         </Button>

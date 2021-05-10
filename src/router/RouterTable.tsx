@@ -4,6 +4,7 @@ import QueryPage from '../views/QueryPage/QueryPage';
 import FeedbackInfo from '../views/Feedback/FeedbackInfo';
 import BrowsingRecords from '../views/BrowsingRecords/BrowsingRecords';
 import { JobPosting } from '../views/JobPosting/JobPosting';
+import MyRelease from '../views/MyRelease/MyRelease';
 
 interface routerTable {
   path: string,
@@ -41,5 +42,9 @@ export const routerConfig:routerTable[] = [
   {
     path: '/jobposting',
     component: JobPosting
+  },
+  {
+    path: '/myrelease',
+    component: MyRelease
   }
 ]
