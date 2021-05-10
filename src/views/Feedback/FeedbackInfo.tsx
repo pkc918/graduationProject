@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {FC, useEffect, useState} from 'react';
 import {NavBar} from '../../components/Nav';
 import request from '../../request/request';
-import {Pagination} from 'antd';
+import {Pagination,Button} from 'antd';
 
 const Main = styled.main`
   width: 100%;
@@ -22,6 +22,10 @@ const Main = styled.main`
       padding: 10px;
       margin-bottom: 40px;
 
+      Button{
+        margin-bottom: 10px;
+      }
+
       h3 {
         width: 100%;
         height: 40px;
@@ -29,7 +33,7 @@ const Main = styled.main`
         text-align: center;
         line-height: 40px;
         background-color: #ffccc7;
-        border-radius: 20px;
+        border-radius: 10px;
         margin-bottom: 10px;
       }
 
@@ -66,8 +70,7 @@ const FeedbackInfo: FC = () => {
       return page
     })
   }
-
-  useEffect(() => {
+  const getFeedBack = () => {
     request('/feedback/selectPage', 'GET', {'pageNum':page,pageSize})
       .then(res => {
         console.log('反馈');
@@ -75,6 +78,23 @@ const FeedbackInfo: FC = () => {
         setTotal(res.data.data.total);
         setTableData(res.data.data.records);
       });
+  }
+  /*删除*/
+  const handleDelete = (item: any) => {
+    console.log(item);
+    request('/feedback/delete','GET',{id:item.id})
+      .then(res => {
+        console.log(res);
+        if (res.data.code === 200) {
+          getFeedBack()
+        }
+      })
+  }
+
+
+
+  useEffect(() => {
+    getFeedBack()
   }, [page]);
 
   return (
@@ -85,6 +105,10 @@ const FeedbackInfo: FC = () => {
           tableData.map(item => {
             return (
               <section key={Math.random()}>
+                <Button
+                  onClick={() => {handleDelete(item)}}
+                  type="primary"
+                  danger>删除</Button>
                 {/* @ts-ignore*/}
                 <h3>{item.createTime}</h3>
                 {/* @ts-ignore*/}
