@@ -75,7 +75,7 @@ const QueryPage: FC = () => {
       dataIndex: 'companyLink',
       key: 'companyLink',
       render: (url) => (
-        <a target={'_blank'} href={url}>详情</a>
+        <a target="_blank" href={url}>详情</a>
       ),
     }
   ];
