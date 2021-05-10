@@ -3,6 +3,7 @@ import Login from '../views/Login/Login';
 import QueryPage from '../views/QueryPage/QueryPage';
 import FeedbackInfo from '../views/Feedback/FeedbackInfo';
 import BrowsingRecords from '../views/BrowsingRecords/BrowsingRecords';
+import { JobPosting } from '../views/JobPosting/JobPosting';
 
 interface routerTable {
   path: string,
@@ -36,5 +37,9 @@ export const routerConfig:routerTable[] = [
   {
     path: '/browsingrecords',
     component: BrowsingRecords
+  },
+  {
+    path: '/jobposting',
+    component: JobPosting
   }
 ]

@@ -74,6 +74,9 @@ const NavBar = (props: propsType) => {
       <li>
         <Link className={props.id === 4 ? 'seleted' : ''} to="/browsingrecords">浏览记录</Link>
       </li>
+      <li>
+        <Link className={props.id === 5 ? 'seleted' : ''} to="/jobposting">职位发布</Link>
+      </li>
     </Nav>
   );
 };

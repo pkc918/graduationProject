@@ -14,6 +14,7 @@ const Main = styled.main`
     width: 100%;
     padding: 30px;
     display: grid;
+    margin-left: 30px;
   }
 `
 
@@ -74,18 +75,6 @@ const BrowsingRecords: FC = () => {
         console.log(res.data.data);
 
       })
-    // setTimeout(() => {
-    //   setPieData([
-    //     {value: 40, name: 'rose 1'},
-    //     {value: 38, name: 'rose 2'},
-    //     {value: 32, name: 'rose 3'},
-    //     {value: 30, name: 'rose 4'},
-    //     {value: 28, name: 'rose 5'},
-    //     {value: 26, name: 'rose 6'},
-    //     {value: 22, name: 'rose 7'},
-    //     {value: 18, name: 'rose 8'}
-    //   ])
-    // },0)
     getInfo()
   }, [])
 
