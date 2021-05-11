@@ -84,7 +84,7 @@ const MyRelease: FC = () => {
 
   const [total, setTotal] = useState(1);
   const [page,setPage] = useState(1);
-  const [pageSize] = useState(4);
+  const [pageSize] = useState(10);
   const [dataSource,setDataSource] = useState([]);
 
   const getMyReleaseData = () => {

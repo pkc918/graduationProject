@@ -91,8 +91,6 @@ const FeedbackInfo: FC = () => {
       })
   }
 
-
-
   useEffect(() => {
     getFeedBack()
   }, [page]);
