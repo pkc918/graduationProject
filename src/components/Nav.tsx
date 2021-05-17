@@ -96,6 +96,12 @@ const NavBar = (props: propsType) => {
           <Link className={props.id === 7 ? 'seleted' : ''} to="/myfeedback">发布反馈</Link>
         </li>
       }
+      {
+        Number(localStorage.getItem('XState')) === 2 &&
+        <li>
+          <Link className={props.id === 8 ? 'seleted' : ''} to="/maylike">猜你喜欢</Link>
+        </li>
+      }
     </Nav>
   );
 };
