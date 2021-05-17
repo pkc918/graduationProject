@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -53,33 +53,57 @@ const Nav = styled.ul`
 type propsType = {
   id: number
 }
-const handleLogout = () => {
-  localStorage.removeItem('token');
-}
+
 const NavBar = (props: propsType) => {
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('XState');
+  }
+  const [state,setState] = useState(0);
+  useEffect(() => {
+    setState(Number(localStorage.getItem('XState')))
+    console.log(Number(localStorage.getItem('XState')));
+  },[])
+
   return (
     <Nav>
       <li>
         <Link onClick={handleLogout} to="/login">退出登录</Link>
       </li>
+
       <li>
         <Link className={props.id === 1 ? 'seleted' : ''} to="/home">数据统计</Link>
       </li>
-      <li>
-        <Link className={props.id === 2 ? 'seleted' : ''} to="/querypage">职位查询</Link>
-      </li>
-      <li>
-        <Link className={props.id === 3 ? 'seleted' : ''} to="/feedback">用户反馈</Link>
-      </li>
-      <li>
-        <Link className={props.id === 4 ? 'seleted' : ''} to="/browsingrecords">浏览记录</Link>
-      </li>
-      <li>
-        <Link className={props.id === 5 ? 'seleted' : ''} to="/jobposting">职位发布</Link>
-      </li>
-      <li>
-        <Link className={props.id === 6 ? 'seleted' : ''} to="/myrelease">我的发布</Link>
-      </li>
+      {
+        state !== 2 &&
+        <li>
+          <Link className={props.id === 2 ? 'seleted' : ''} to="/querypage">职位查询</Link>
+        </li>
+      }
+      {
+        state !== 2 &&
+        <li>
+          <Link className={props.id === 3 ? 'seleted' : ''} to="/feedback">用户反馈</Link>
+        </li>
+      }
+      {
+        state !== 2 &&
+        <li>
+          <Link className={props.id === 4 ? 'seleted' : ''} to="/browsingrecords">浏览记录</Link>
+        </li>
+      }
+      {
+        state !== 2 &&
+        <li>
+          <Link className={props.id === 5 ? 'seleted' : ''} to="/jobposting">职位发布</Link>
+        </li>
+      }
+      {
+        state !== 2 &&
+        <li>
+          <Link className={props.id === 6 ? 'seleted' : ''} to="/myrelease">我的发布</Link>
+        </li>
+      }
     </Nav>
   );
 };

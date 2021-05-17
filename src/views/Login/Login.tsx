@@ -46,6 +46,7 @@ const Login: FC = () => {
         message.success(res.data.msg).then(r => r);
         if (localStorage.getItem('token')){
           console.log(111);
+          checkLogin()
           history.push('/home');
         }
       })
@@ -55,6 +56,12 @@ const Login: FC = () => {
     console.log(imgURL);
     console.log(user);
   };
+  const checkLogin = () => {
+    request('/checklogin','GET')
+      .then(res => {
+        localStorage.setItem('XState',res.data.data)
+      })
+  }
   useEffect(() => {
     handleGetCode();
   },[]);
