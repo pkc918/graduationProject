@@ -222,7 +222,9 @@ const QueryPage: FC = () => {
             >
               查询
             </Button>
-            <UpdateXLS/>
+            {
+              Number(localStorage.getItem('XState')) !== 2 && <UpdateXLS/>
+            }
           </div>
         </div>
         <div className="dataInfo">

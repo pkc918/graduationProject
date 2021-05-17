@@ -7,12 +7,18 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   background: url("https://static.xiedaimala.com/xdml/image/6e556a51-b8ff-466f-bda6-7d1847e39f2e/2019-12-4-14-4-6.jpg") center center / 100% 100% no-repeat;
-  
-  > .form {
+  > div{
+    border-radius: 10px;
+    background-color: #fff;
+    
+    .ant-tabs-nav{
+      margin: auto;
+    }
+  }
+   .form {
     width: 400px;
     padding-bottom: 20px;
-    background-color: #fff;
-    border-radius: 10px;
+    
     display: grid;
     text-align: center;
     align-items: center;
@@ -89,6 +95,14 @@ const Div = styled.div`
       border: none;
       border-radius: 5px;
     }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
   }
 `;
 
