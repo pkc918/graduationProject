@@ -59,6 +59,21 @@ const MyRelease: FC = () => {
       key: 'weight',
     },
     {
+      title: '学历',
+      dataIndex: 'education',
+      key: 'education',
+    },
+    {
+      title: '地区',
+      dataIndex: 'area',
+      key: 'area',
+    },
+    {
+      title: '薪资',
+      dataIndex: 'salary',
+      key: 'salary',
+    },
+    {
       title: '查看详情',
       dataIndex: 'id',
       key: 'id',
