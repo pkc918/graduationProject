@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react';
 import {Button, Input} from 'antd';
 import {NavBar} from '../../components/Nav';
 import styled from 'styled-components';
+import request from '../../request/request';
 
 const Main = styled.main`
   width: 100%;
@@ -36,6 +37,14 @@ const MyFeedback:FC = () => {
   };
   const submitContent = () => {
     console.log(content);
+    request("/feedback/addFeedback","POST",{feedback: content})
+      .then(res => {
+        if (res.data.code === 200){
+          setContent(() => {
+            return ''
+          })
+        }
+      })
   }
 
   return(
