@@ -87,12 +87,9 @@ const NavBar = (props: propsType) => {
           <Link className={props.id === 5 ? 'seleted' : ''} to="/jobposting">职位发布</Link>
         </li>
       }
-      {
-        Number(localStorage.getItem('XState')) !== 2 &&
         <li>
-          <Link className={props.id === 6 ? 'seleted' : ''} to="/myrelease">我的发布</Link>
+          <Link className={props.id === 6 ? 'seleted' : ''} to="/myrelease">推荐职位</Link>
         </li>
-      }
       {
         Number(localStorage.getItem('XState')) === 2 &&
         <li>

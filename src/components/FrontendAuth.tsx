@@ -9,6 +9,7 @@ export class FrontendAuth extends React.Component<any, propsModel>{
   render() {
     const {location,config} = this.props;
     const {pathname} = location;
+    console.log(pathname);
     const isLogin = localStorage.getItem('token');
     const targetRouterConfig = config.find((v:any) => v.path === pathname);
 
