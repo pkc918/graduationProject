@@ -18,19 +18,24 @@ const Main = styled.main`
     box-sizing: border-box;
     overflow-y: auto;
     display: grid;
-    grid-template-rows: 52px 32px 1fr;
+    grid-template-rows: 52px 32px 72px 52px 1fr;
     
     Input {
       width: 600px;
       margin-bottom: 20px;
+
+      &.int{
+        margin-top: 20px;
+      }
     }
+    
 
     .ant-select {
       width: 600px !important;
     }
 
     .markdown{
-      margin-top: 20px;
+      margin: 20px 0 0 0;
     }
   }
   
@@ -51,6 +56,24 @@ const JobPosting: FC = () => {
     setTitle(event.target.value);
     console.log(event.target.value);
   }
+  /*学历*/
+  const [education,setEducation] = useState("");
+  const handleChangeEducation: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setEducation(event.target.value);
+    console.log(event.target.value);
+  }
+  /*地区*/
+  const [area,setArea] = useState("");
+  const handleChangeArea: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setArea(event.target.value);
+    console.log(event.target.value);
+  }
+  /*薪资*/
+  const [salary,setSalary] = useState("");
+  const handleChangeSalary: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setSalary(event.target.value);
+    console.log(event.target.value);
+  }
   /*权重*/
   const [weights,setWeights] = useState(["0","1","2","3","4","5","6","7","8","9","10"]);
   const [weight,setWeight] = useState("");
@@ -69,7 +92,10 @@ const JobPosting: FC = () => {
     let data = {
       title,
       weight,
-      content: markdown
+      content: markdown,
+      education,
+      area,
+      salary
     }
     request('/public-position/public','POST',data)
       .then(res => {
@@ -100,6 +126,22 @@ const JobPosting: FC = () => {
             <Option key={item} value={item}>{item}</Option>
           ))}
         </Select>
+        <Input
+          className="int"
+          placeholder="学历"
+          value={education}
+          onChange={handleChangeEducation}
+        />
+        <Input
+          placeholder="地区"
+          value={area}
+          onChange={handleChangeArea}
+        />
+        <Input
+          placeholder="薪资"
+          value={salary}
+          onChange={handleChangeSalary}
+        />
         <MarkdownEditor
           className="markdown"
           value={markdown}
