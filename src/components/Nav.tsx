@@ -96,7 +96,7 @@ const NavBar = (props: propsType) => {
       {
         Number(localStorage.getItem('XState')) === 2 &&
         <li>
-          <Link className={props.id === 7 ? 'seleted' : ''} to="/myrelease">我的发布</Link>
+          <Link className={props.id === 7 ? 'seleted' : ''} to="/myfeedback">发布反馈</Link>
         </li>
       }
     </Nav>

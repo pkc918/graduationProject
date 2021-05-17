@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {NavBar} from '../../components/Nav';
 import request from '../../request/request';
 import {Pagination,Button} from 'antd';
+import UpdateXLS from '../../components/UpdateXLS';
 
 const Main = styled.main`
   width: 100%;
@@ -103,10 +104,15 @@ const FeedbackInfo: FC = () => {
           tableData.map(item => {
             return (
               <section key={Math.random()}>
-                <Button
-                  onClick={() => {handleDelete(item)}}
-                  type="primary"
-                  danger>删除</Button>
+                {
+                  Number(localStorage.getItem('XState')) !== 2
+                  &&
+                  <Button
+                    onClick={() => {handleDelete(item)}}
+                    type="primary"
+                    danger>删除</Button>
+                }
+
                 {/* @ts-ignore*/}
                 <h3>{item.createTime}</h3>
                 {/* @ts-ignore*/}

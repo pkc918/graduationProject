@@ -5,6 +5,7 @@ import FeedbackInfo from '../views/Feedback/FeedbackInfo';
 import BrowsingRecords from '../views/BrowsingRecords/BrowsingRecords';
 import { JobPosting } from '../views/JobPosting/JobPosting';
 import MyRelease from '../views/MyRelease/MyRelease';
+import { MyFeedback } from '../views/MyFeedback/MyFeedback';
 
 interface routerTable {
   path: string,
@@ -46,5 +47,9 @@ export const routerConfig:routerTable[] = [
   {
     path: '/myrelease',
     component: MyRelease
+  },
+  {
+    path: '/myfeedback',
+    component: MyFeedback
   }
 ]
