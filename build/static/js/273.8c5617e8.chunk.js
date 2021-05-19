@@ -1,0 +1,2 @@
+(this.webpackJsonpgraduation_project=this.webpackJsonpgraduation_project||[]).push([[273],{528:function(n,a){Prism.languages["nand2tetris-hdl"]={comment:/\/\/.*|\/\*[\s\S]*?(?:\*\/|$)/,keyword:/\b(?:CHIP|IN|OUT|PARTS|BUILTIN|CLOCKED)\b/,boolean:/\b(?:true|false)\b/,function:/[A-Za-z][A-Za-z0-9]*(?=\()/,number:/\b\d+\b/,operator:/=|\.\./,punctuation:/[{}[\];(),:]/}}}]);
+//# sourceMappingURL=273.8c5617e8.chunk.js.map

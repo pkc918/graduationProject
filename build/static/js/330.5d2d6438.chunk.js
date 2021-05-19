@@ -1,0 +1,2 @@
+(this.webpackJsonpgraduation_project=this.webpackJsonpgraduation_project||[]).push([[330],{585:function(t,n){Prism.languages.properties={comment:/^[ \t]*[#!].*$/m,"attr-value":{pattern:/(^[ \t]*(?:\\(?:\r\n|[\s\S])|[^\\\s:=])+?(?: *[=:] *(?! )| ))(?:\\(?:\r\n|[\s\S])|[^\\\r\n])+/m,lookbehind:!0},"attr-name":/^[ \t]*(?:\\(?:\r\n|[\s\S])|[^\\\s:=])+?(?= *[=:] *| )/m,punctuation:/[=:]/}}}]);
+//# sourceMappingURL=330.5d2d6438.chunk.js.map

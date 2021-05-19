@@ -1,0 +1,2 @@
+(this.webpackJsonpgraduation_project=this.webpackJsonpgraduation_project||[]).push([[419],{674:function(a,t){Prism.languages.tap={fail:/not ok[^#{\n\r]*/,pass:/ok[^#{\n\r]*/,pragma:/pragma [+-][a-z]+/,bailout:/bail out!.*/i,version:/TAP version \d+/i,plan:/\d+\.\.\d+(?: +#.*)?/,subtest:{pattern:/# Subtest(?:: .*)?/,greedy:!0},punctuation:/[{}]/,directive:/#.*/,yamlish:{pattern:/(^[ \t]*)---[\s\S]*?[\r\n][ \t]*\.\.\.$/m,lookbehind:!0,inside:Prism.languages.yaml,alias:"language-yaml"}}}}]);
+//# sourceMappingURL=419.519e8781.chunk.js.map
