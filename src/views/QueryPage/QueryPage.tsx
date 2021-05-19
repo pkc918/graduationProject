@@ -30,15 +30,12 @@ const QueryPage: FC = () => {
   const [pagination, setPagination] = useState({current: 1, total: 0});
   const [dataSource, setDataSource] = useState([]);
   const handleClick = (record: TopBar) => {
+    // @ts-ignore
+    window.open(record.companyLink);
     request('/browse-records/add','GET',{...record})
       .then(res => {
-        if (res.data.code === 200){
-          // @ts-ignore
-          window.open(record.companyLink);
-        }
         console.log(res);
       })
-    console.log(record);
   }
   const columns: ColumnsType<TopBar> = [
     {
