@@ -29,6 +29,17 @@ const QueryPage: FC = () => {
   /*table 数据*/
   const [pagination, setPagination] = useState({current: 1, total: 0});
   const [dataSource, setDataSource] = useState([]);
+  const handleClick = (record: TopBar) => {
+    request('/browse-records/add','GET',{...record})
+      .then(res => {
+        if (res.data.code === 200){
+          // @ts-ignore
+          window.open(record.companyLink);
+        }
+        console.log(res);
+      })
+    console.log(record);
+  }
   const columns: ColumnsType<TopBar> = [
     {
       title: '城市',
@@ -74,8 +85,8 @@ const QueryPage: FC = () => {
       title: '查看详情',
       dataIndex: 'companyLink',
       key: 'companyLink',
-      render: (url) => (
-        <a href={url}>详情</a>
+      render: (url,record) => (
+        <div style={{color: 'blue',cursor:'pointer'}} onClick={() => {handleClick(record)}}>详情</div>
       ),
     }
   ];
